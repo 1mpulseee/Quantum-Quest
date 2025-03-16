@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1227079334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +412,7 @@ MonoBehaviour:
   betweenHalf: 0.05
   betweenChar: 0.03
   smoothTime: 0.1
+  messageUI: {fileID: 1227079333}
 --- !u!114 &1650959119
 MonoBehaviour:
   m_ObjectHideFlags: 0

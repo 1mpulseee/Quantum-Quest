@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 public class TextAnimation : MonoBehaviour
 {
@@ -16,7 +17,14 @@ public class TextAnimation : MonoBehaviour
 
     bool isAnimated;
 
+    [SerializeField] GameObject messageUI;
+    MessageSettings currentMessageSettings;
+    IEnumerator TextAnim;
     private void Start()
+    {
+        TextAnimation.Instance.StartMessages("Hello");
+    }
+    void StartTextAnim()
     {
         message.ForceMeshUpdate();
         leftAplhas = new float[message.text.Length].ToList();
@@ -24,7 +32,8 @@ public class TextAnimation : MonoBehaviour
 
         Visible(false);
         isAnimated = true;
-        StartCoroutine(Smooth(0));
+        TextAnim = Smooth(0);
+        StartCoroutine(TextAnim);
     }
     private void Update()
     {
@@ -39,7 +48,10 @@ public class TextAnimation : MonoBehaviour
     }
     void Visible(bool visible)
     {
-        StopAllCoroutines();
+        if (TextAnim != null)
+        {
+            StopCoroutine(TextAnim);
+        }
         DOTween.Kill(1);
 
         for (int i = 0; i < leftAplhas.Count; i++)
@@ -75,6 +87,7 @@ public class TextAnimation : MonoBehaviour
         if (i >= leftAplhas.Count)
         {
             isAnimated = false;
+            TextAnim = null;
             yield break;
         }
             
@@ -99,6 +112,61 @@ public class TextAnimation : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(betweenChar);
 
-        StartCoroutine(Smooth(i + 1));
+        TextAnim = Smooth(i + 1);
+        StartCoroutine(TextAnim);
+    }
+    IEnumerator MessageLogic()
+    {
+        messageUI.SetActive(true);
+
+        for (int i = 0; i < currentMessageSettings.Messages.Length; i++)
+        {
+            message.text = currentMessageSettings.Messages[i];
+            StartTextAnim();
+
+            yield return new WaitUntil(() => !isAnimated || Input.anyKeyDown);
+            yield return null;
+            Visible(true);
+            isAnimated = false;
+            yield return new WaitUntil(() => Input.anyKeyDown);
+            yield return null;
+        }
+
+        messageUI.SetActive(false);
+    }
+    public void StartMessages(string messageName)
+    {
+        currentMessageSettings = Resources.Load<MessageSettings>($"Messages/{messageName}");
+
+        if (currentMessageSettings != null)
+        {
+            StartCoroutine(MessageLogic());
+        }
+        else
+        {
+            Debug.LogError($"MessageSettings with name {messageName} not found in Resources/Messages");
+        }
+    }
+    #region Singleton
+    public static TextAnimation Instance;
+#if UNITY_EDITOR
+    [UnityEditor.InitializeOnEnterPlayMode]
+    static void ResetOnEnterPlayMode() => Instance = null;
+#else
+[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+static void ResetStaticVariables() => Instance = null;
+#endif
+    #endregion
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
