@@ -5,9 +5,12 @@ public class ItemInteractionHandler : MonoBehaviour
     private PickableItem _pickableItem;
     private PickUpManager _pickUpManager;
     private bool _isInRange;
+    private int _itemsInHands;
+
 
     private void Awake()
     {
+        _itemsInHands = 0;
         _pickableItem = GetComponent<PickableItem>();
     }
 
@@ -37,13 +40,15 @@ public class ItemInteractionHandler : MonoBehaviour
     {
         if (_isInRange && Input.GetKeyDown(KeyCode.E))
         {
-            if (_pickableItem.IsHeld)
+            if (!_pickableItem.IsHeld && _pickUpManager.CanPickUp())
             {
-                _pickableItem.Drop();
+                _pickableItem.PickUp();
+                _pickUpManager.SetCurrentItem(_pickableItem);
             }
             else
             {
-                _pickableItem.PickUp();
+                _pickableItem.Drop();
+                _pickUpManager.ClearCurrentItem();
             }
         }
     }

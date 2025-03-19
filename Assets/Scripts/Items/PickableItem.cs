@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PickableItem : MonoBehaviour
@@ -26,12 +27,18 @@ public class PickableItem : MonoBehaviour
 
     public void PickUp()
     {
+        transform.DOScale(0f, 0.2f).From(transform.localScale).SetEase(Ease.Linear);
+        
         _hintTriggerZone.enabled = false;
-        HintManager.HideHintEvent?.Invoke();
+        
         _rigidbody.isKinematic = true;
         transform.position = _holdPoint.position;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
         transform.parent = _holdPoint;
+        
+        transform.DOScale(transform.localScale, 0.2f).From(0f).SetEase(Ease.OutBounce);
         _isHeld = true;
+        HintManager.HideHintEvent?.Invoke();
     }
 
     public void Drop()
@@ -46,4 +53,5 @@ public class PickableItem : MonoBehaviour
 
         _rigidbody.AddForce(_playerTransform.forward * _throwForce, ForceMode.Impulse);
     }
+
 }
