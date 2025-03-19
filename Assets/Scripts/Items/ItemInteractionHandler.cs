@@ -5,12 +5,10 @@ public class ItemInteractionHandler : MonoBehaviour
     private PickableItem _pickableItem;
     private PickUpManager _pickUpManager;
     private bool _isInRange;
-    private int _itemsInHands;
 
 
     private void Awake()
     {
-        _itemsInHands = 0;
         _pickableItem = GetComponent<PickableItem>();
     }
 
