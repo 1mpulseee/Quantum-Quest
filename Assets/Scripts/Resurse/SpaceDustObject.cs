@@ -7,7 +7,7 @@ public class SpaceDustObject : MonoBehaviour
         if (collision.gameObject.CompareTag("Reactor"))
         {
             ReactorController reactor = collision.gameObject.GetComponent<ReactorController>();
-            reactor.LowTemperatere(100);
+            reactor.LowTemperature(100);
             Destroy(gameObject);
         }
     }

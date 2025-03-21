@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Garbage
+  - Lamp
+  - Reactor
+  - MiniGame
   layers:
   - Default
   - TransparentFX

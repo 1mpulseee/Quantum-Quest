@@ -3,22 +3,22 @@ using TMPro;
 
 public class PlayerEconomy : MonoBehaviour
 {
-    public static PlayerEconomy Instance;
+    public static PlayerEconomy Instance { get; private set; }
 
+    [SerializeField] private int _playerMoney = 1000;
     [SerializeField] private TextMeshProUGUI _moneyText;
 
     public int Money { get; private set; } 
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
+
+        Money = _playerMoney;
+        UpdateMoneyUI();
     }
 
     public void AddMoney(int amount)
@@ -30,6 +30,7 @@ public class PlayerEconomy : MonoBehaviour
     public void SubtractMoney(int amount)
     {
         Money -= amount;
+        UpdateMoneyUI();
         Debug.Log($"Списано {amount} денег. Текущий баланс: {Money}");
     }
 
