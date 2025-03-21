@@ -15,8 +15,9 @@ public class MiniGameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private float _diodeDelay = 1f; // Задержка между переключениями диодов
     [SerializeField] private float _gameDuration = 30f; // Длительность мини-игры в секундах
-    [SerializeField] private ReactorController _reactor;
 
+    private List<ReactorController> _reactors; // Список всех реакторов
+    private ReactorController _reactor;
     private int _currentDiodeIndex; // Индекс текущего активного диода
     private bool _isGameActive; // Активна ли мини-игра
     private float _timeRemaining; // Оставшееся время
@@ -25,12 +26,11 @@ public class MiniGameController : MonoBehaviour
 
     private void Start()
     {
-        // Инициализация лампочек и диодов
-        foreach (var lamp in lamps)
-            lamp.color = Color.gray; // Лампочки выключены
-     
-        foreach (var diode in diodes)
-            diode.color = Color.gray; // Диоды выключены
+        // Находим все реакторы в сцене
+        _reactors = new List<ReactorController>(FindObjectsByType<ReactorController>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        //_reactor = FindFirstObjectByType<ReactorController>();
+
+        ResetMiniGame();
     }
 
     private void Update()
@@ -45,6 +45,8 @@ public class MiniGameController : MonoBehaviour
 
     public void StartMiniGame()
     {
+        gameObject.SetActive(true);
+
         if (_isGameActive) return;
 
         _isProcessingClick = false;
@@ -70,7 +72,12 @@ public class MiniGameController : MonoBehaviour
         if (isWin)
         {
             Debug.Log("Мини-игра выиграна!");
-            _reactor.temperature = 450f;
+            // Находим реактор с наименьшей температурой
+            ReactorController coldestReactor = GetColdestReactor();
+            if (coldestReactor != null)
+            {
+                coldestReactor.temperature = 450f; // Устанавливаем температуру
+            }
         }
         else
         {
@@ -79,6 +86,22 @@ public class MiniGameController : MonoBehaviour
 
         OnMiniGameEnded.Invoke(isWin); // Уведомляем о завершении мини-игры
         gameObject.SetActive(false); // Скрываем мини-игру
+    }
+
+    private ReactorController GetColdestReactor()
+    {
+        if (_reactors == null || _reactors.Count == 0)
+            return null;
+
+        ReactorController coldestReactor = _reactors[0];
+        foreach (var reactor in _reactors)
+        {
+            if (reactor.temperature < coldestReactor.temperature)
+            {
+                coldestReactor = reactor;
+            }
+        }
+        return coldestReactor;
     }
 
     private void ExitMiniGame()

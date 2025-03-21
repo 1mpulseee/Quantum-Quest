@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5534785647218633115}
   - component: {fileID: 6917712130688100683}
   - component: {fileID: 7345340168424959849}
+  - component: {fileID: 5603966590927573975}
   m_Layer: 0
-  m_Name: StoneResource
+  m_Name: SpaceDustResource
   m_TagString: Garbage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +111,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hintTriggerZone: {fileID: 7188516394880986833}
+--- !u!114 &5603966590927573975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688373671578307610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb421ac26d5a0541a4884543f82822b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2728159854235317680
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2df9ec28e9156e1498a9db69dac8296b, type: 2}
+  - {fileID: 2100000, guid: abfd39812f95eff4fae226fcd0df5364, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
