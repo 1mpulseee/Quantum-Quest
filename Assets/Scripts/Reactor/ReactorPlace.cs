@@ -12,13 +12,13 @@ public class ReactorPlace : MonoBehaviour
     {
         if (reactorPrefab == null)
         {
-            Debug.LogError("Префаб реактора не назначен!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
             return;
         }
 
         _reactorEconomy = reactorPrefab.GetComponent<ReactorEconomy>();
         if (_reactorEconomy == null)
-            Debug.LogError("Компонент ReactorEconomy не найден на префабе реактора!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ReactorEconomy пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 
         _reactorState = new ReactorState(this, buyPromptUI);
         _reactorState.Initialize();
@@ -34,7 +34,7 @@ public class ReactorPlace : MonoBehaviour
     {
         if (_reactorEconomy == null)
         {
-            Debug.LogError("ReactorEconomy не инициализирован!");
+            Debug.LogError("ReactorEconomy пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
             return;
         }
 
@@ -60,7 +60,7 @@ public class ReactorPlace : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Префаб реактора не назначен!");
+            Debug.LogError("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
@@ -83,7 +83,7 @@ public class ReactorPlace : MonoBehaviour
 }
 
 /// <summary>
-/// Паттерн Состояния
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 /// </summary>
 public class ReactorState
 {

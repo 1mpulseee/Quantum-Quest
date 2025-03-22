@@ -221,9 +221,9 @@ GameObject:
   - component: {fileID: 2833254356339431412}
   - component: {fileID: 1225184071366973135}
   - component: {fileID: 4926394767765299640}
-  - component: {fileID: 4591777498772427160}
   - component: {fileID: -9074420654042718399}
   - component: {fileID: 4148659988312118636}
+  - component: {fileID: 8397718344576051511}
   m_Layer: 0
   m_Name: Reactor
   m_TagString: Reactor
@@ -301,27 +301,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4591777498772427160
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845476165614074510}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-9074420654042718399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +343,27 @@ MonoBehaviour:
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _overheatingColor: {r: 1, g: 0, b: 0, a: 1}
   _coolingColor: {r: 0, g: 0, b: 1, a: 1}
+--- !u!135 &8397718344576051511
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845476165614074510}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.96
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2101080332779655770
 GameObject:
   m_ObjectHideFlags: 0

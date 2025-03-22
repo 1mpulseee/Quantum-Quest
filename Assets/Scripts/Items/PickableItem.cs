@@ -16,7 +16,6 @@ public class PickableItem : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _gameObject = this.gameObject;
     }
 
     public void Initialize(Transform playerTransform, Transform holdPoint, float throwForce)

@@ -1,16 +1,12 @@
-using System;
 using UnityEngine;
 
-public class HintTrigger : MonoBehaviour
+public class OutlineTrigger : MonoBehaviour
 {
-    [Header("Текст подсказки")]
-    [SerializeField] private string _message;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            HintManager.DisplayHintEvent?.Invoke(_message);
+            OutlineManager.EnableOutlineEvent?.Invoke(gameObject);
         }
     }
 
@@ -18,7 +14,7 @@ public class HintTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HintManager.HideHintEvent?.Invoke();
+            OutlineManager.DisableOutlineEvent?.Invoke(gameObject);
         }
     }
 }

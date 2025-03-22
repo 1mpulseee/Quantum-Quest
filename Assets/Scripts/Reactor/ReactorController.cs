@@ -4,27 +4,23 @@ using UnityEngine.UI;
 
 public class ReactorController : MonoBehaviour
 {
-    public UnityEvent OnReactorDestroyed; // Событие удаления реактора
+    public UnityEvent OnReactorDestroyed; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    [Header("Temperature Settings")]
-    public float temperature = 500f; // Начальная температура
-    public float optimalMin = 450f; // Минимальная оптимальная температура
-    public float optimalMax = 750f; // Максимальная оптимальная температура
-    public float coolingRate = 1f; // Скорость охлаждения
-    public float heatingRate = 1f; // Скорость нагрева
+    [Header("Temperature Settings")] public float temperature = 500f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float optimalMin = 450f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float optimalMax = 750f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float coolingRate = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    public float heatingRate = 1f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     [SerializeField] private float _minTemp = 200f;
     [SerializeField] private float _maxTemp = 1000f;
 
-    [Header("Economy")]
-    public float moneyInterval = 5f; // Интервал начисления денег (в секундах)
-    public int moneyPerInterval = 10; // Количество денег за интервал
+    [Header("Economy")] public float moneyInterval = 5f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+    public int moneyPerInterval = 10; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    [Header("UI")]
-    [SerializeField] private Slider _temperatureSlider;
+    [Header("UI")] [SerializeField] private Slider _temperatureSlider;
 
-    [Header("Effects")]
-    [SerializeField] private GameObject _explosionEffect; // Префаб эффекта взрыва
+    [Header("Effects")] [SerializeField] private GameObject _explosionEffect; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     [SerializeField] private Renderer _reactorRenderer;
     [SerializeField] private Color _normalColor = Color.white;
     [SerializeField] private Color _overheatingColor = Color.red;
@@ -40,13 +36,13 @@ public class ReactorController : MonoBehaviour
             _reactorRenderer = GetComponent<Renderer>();
 
         if (_reactorRenderer == null)
-            Debug.LogError("Renderer не найден на объекте реактора!");
+            Debug.LogError("Renderer пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         else
             _reactorRenderer.material.color = _normalColor;
 
         _miniGameController = FindMiniGameController();
         if (_miniGameController == null)
-            Debug.LogError("MiniGameController не найден в сцене!");
+            Debug.LogError("MiniGameController пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ!");
         else
             _miniGameController.OnMiniGameEnded.AddListener(HandleMiniGameEnd);
 
@@ -73,17 +69,19 @@ public class ReactorController : MonoBehaviour
 
     public void UpTemperature(float amount) => temperature += amount;
 
+
     public void LowTemperature(float amount)
     {
-        if ((temperature -= amount) < _minTemp) StartMiniGame();
+        if ((temperature -= amount) < _minTemp)
+            StartMiniGame();
     }
 
     public void DestroyReactor()
     {
-        int refundAmount = ReactorEconomy.BaseReactorCost / 2; // Возвращаем 50% стоимости (пример)
+        int refundAmount = ReactorEconomy.BaseReactorCost / 2; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 50% пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ)
         AddMoney(refundAmount);
 
-        Debug.Log($"Реактор уничтожен! Вы получили {refundAmount} денег.");
+        Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ {refundAmount} пїЅпїЅпїЅпїЅпїЅ.");
 
         DeactivateReactor();
     }
@@ -93,7 +91,7 @@ public class ReactorController : MonoBehaviour
         if (_explosionEffect != null)
             Instantiate(_explosionEffect, transform.position, Quaternion.identity);
 
-        Debug.Log("Реактор взорвался!");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 
         DeactivateReactor();
     }
@@ -118,7 +116,9 @@ public class ReactorController : MonoBehaviour
     {
         if ((_timer -= Time.deltaTime) <= 0)
         {
-            int money = temperature >= optimalMin && temperature <= optimalMax ? moneyPerInterval * 2 : moneyPerInterval;
+            int money = temperature >= optimalMin && temperature <= optimalMax
+                ? moneyPerInterval * 2
+                : moneyPerInterval;
             AddMoney(money);
             _timer = moneyInterval;
         }
@@ -129,7 +129,7 @@ public class ReactorController : MonoBehaviour
         if (PlayerEconomy.Instance != null)
             PlayerEconomy.Instance.AddMoney(amount);
         else
-            Debug.LogError("PlayerEconomy.Instance не найден!");
+            Debug.LogError("PlayerEconomy.Instance пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
     }
 
     private void UpdateTemperatureUI()
@@ -148,17 +148,17 @@ public class ReactorController : MonoBehaviour
     {
         if (_reactorRenderer == null) return;
 
-        if (temperature >= 750f) // Перегрев
+        if (temperature >= 750f) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         {
             float lerpValue = (temperature - 750f) / (_maxTemp - 750f);
             _reactorRenderer.material.color = Color.Lerp(_normalColor, _overheatingColor, lerpValue);
         }
-        else if (temperature <= 450f) // Охлаждение
+        else if (temperature <= 450f) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         {
             float lerpValue = (450f - temperature) / (450f - _minTemp);
             _reactorRenderer.material.color = Color.Lerp(_normalColor, _coolingColor, lerpValue);
         }
-        else // Нормальный режим
+        else // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         {
             _reactorRenderer.material.color = _normalColor;
         }
@@ -183,7 +183,7 @@ public class ReactorController : MonoBehaviour
     {
         if (_miniGameController == null)
         {
-            Debug.LogError("MiniGameController не назначен!");
+            Debug.LogError("MiniGameController пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
             return;
         }
 
