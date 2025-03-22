@@ -11,6 +11,7 @@ public class HintTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             HintManager.DisplayHintEvent?.Invoke(_message);
+            HintManager.EnableOutlineEvent?.Invoke(gameObject);
         }
     }
 
@@ -19,6 +20,7 @@ public class HintTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             HintManager.HideHintEvent?.Invoke();
+            HintManager.DisableOutlineEvent?.Invoke(gameObject);
         }
     }
 }

@@ -14,5 +14,6 @@ public class RandomResourceFactory : IResourceFactory
         if (_resource.Length == 0)
             return null;
         return Object.Instantiate(_resource[Random.Range(0, _resource.Length)], position, rotation);
+        
     }
 }

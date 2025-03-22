@@ -10,12 +10,13 @@ public class PickableItem : MonoBehaviour
     private Transform _holdPoint;
     private float _throwForce;
     [SerializeField] private SphereCollider _hintTriggerZone;
-
+    private GameObject _gameObject;
     public bool IsHeld => _isHeld;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _gameObject = this.gameObject;
     }
 
     public void Initialize(Transform playerTransform, Transform holdPoint, float throwForce)
