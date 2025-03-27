@@ -21,7 +21,6 @@ public class MenuHandler : MonoBehaviour
     {
         SceneTransition.SwitchToScene(_gameSceneName);
     }
-    
     public void ExitGame()
     {
         Application.Quit();
@@ -32,8 +31,8 @@ public class MenuHandler : MonoBehaviour
         if(_currentPanel == newPanel) return;
         Sequence panelSequence = DOTween.Sequence();
         panelSequence
-            .Append(_currentPanel.transform.DOScale(0f, 0.2f).From(0.8f).SetEase(Ease.InQuad))
-            .Append(newPanel.transform.DOScale(0.8f, 0.2f).From(0).SetEase(Ease.InQuad));
+            .Append(_currentPanel.transform.DOScale(0f, 0.2f).From(0.8f).SetEase(Ease.InQuad)).SetUpdate(true)
+            .Append(newPanel.transform.DOScale(0.8f, 0.2f).From(0).SetEase(Ease.InQuad)).SetUpdate(true);
 
         _currentPanel = newPanel;
     }
