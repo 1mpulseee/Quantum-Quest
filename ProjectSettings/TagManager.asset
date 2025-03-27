@@ -8,6 +8,8 @@ TagManager:
   - Lamp
   - Reactor
   - MiniGame
+  - FxTemporaire
+  - Ground
   layers:
   - Default
   - TransparentFX

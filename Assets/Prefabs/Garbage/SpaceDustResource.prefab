@@ -123,6 +123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb421ac26d5a0541a4884543f82822b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lowTemperatueCount: 100
+  _fallEffect: {fileID: 1037864198121816, guid: 638c8ca438a11c54987de876e500ed02, type: 3}
+  _touchEffect: {fileID: 339158821923109191, guid: 108ca465382c11742bd2c91fe4fdb13f, type: 3}
+  _effectLifeTime: 1
 --- !u!1 &2728159854235317680
 GameObject:
   m_ObjectHideFlags: 0

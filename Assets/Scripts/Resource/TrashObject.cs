@@ -4,15 +4,23 @@ using DG.Tweening;
 
 public class TrashObject : MonoBehaviour
 {
-
     [SerializeField] private float _upTemperatueCount = 100f;
+
+    [Header("Effector")]
+    [SerializeField] private GameObject _paffEffect;
+    [SerializeField] private GameObject _touchEffect;
+    [SerializeField] private float _effectLifeTime;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Reactor"))
         {
             ReactorController reactor = other.gameObject.GetComponent<ReactorController>();
+
+            GameObject newEffect = Instantiate(_touchEffect, transform.position, Quaternion.identity);
+            Destroy(newEffect, _effectLifeTime);
+
             StartCoroutine(DestroyAnimation(gameObject, reactor));
-            
         }
     }
 
@@ -22,5 +30,17 @@ public class TrashObject : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Destroy(_gameObject);
         reactor.UpTemperature(_upTemperatueCount);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            if (_paffEffect != null)
+            {
+                GameObject newEffect = Instantiate(_paffEffect, transform.position, Quaternion.identity);
+                Destroy(newEffect, _effectLifeTime);
+            }
+        }
     }
 }

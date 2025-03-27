@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: -9074420654042718399}
   - component: {fileID: 4148659988312118636}
   - component: {fileID: 8397718344576051511}
+  - component: {fileID: 5959113197414514293}
   m_Layer: 0
   m_Name: Reactor
   m_TagString: Reactor
@@ -338,7 +339,7 @@ MonoBehaviour:
   moneyInterval: 5
   moneyPerInterval: 25
   _temperatureSlider: {fileID: 2071946136814263196}
-  _explosionEffect: {fileID: 0}
+  _explosionEffect: {fileID: 3077343761403282166, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
   _reactorRenderer: {fileID: 4926394767765299640}
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _overheatingColor: {r: 1, g: 0, b: 0, a: 1}
@@ -364,6 +365,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.96
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5959113197414514293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845476165614074510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2fcc8f66a87d24a95ff81621a405e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectPrefab: {fileID: 4503612902121041701, guid: 5a936c83b1746f14f9100db745e94f04, type: 3}
+  _effectLifeTime: 1
+  _minDelay: 2
+  _maxDelay: 10
 --- !u!1 &2101080332779655770
 GameObject:
   m_ObjectHideFlags: 0

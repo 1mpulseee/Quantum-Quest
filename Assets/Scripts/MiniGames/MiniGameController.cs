@@ -9,7 +9,7 @@ public class MiniGameController : MonoBehaviour
 {
     public UnityEvent<bool> OnMiniGameEnded; // Событие окончания мини-игры
 
-    public List<Image> lamps; 
+    public List<Image> lamps;
     public List<Image> diodes;
 
     [SerializeField] private TextMeshProUGUI _timerText;
@@ -17,7 +17,6 @@ public class MiniGameController : MonoBehaviour
     [SerializeField] private float _gameDuration = 30f; // Длительность мини-игры в секундах
 
     private List<ReactorController> _reactors; // Список всех реакторов
-    private ReactorController _reactor;
     private int _currentDiodeIndex; // Индекс текущего активного диода
     private bool _isGameActive; // Активна ли мини-игра
     private float _timeRemaining; // Оставшееся время
@@ -28,7 +27,6 @@ public class MiniGameController : MonoBehaviour
     {
         // Находим все реакторы в сцене
         _reactors = new List<ReactorController>(FindObjectsByType<ReactorController>(FindObjectsInactive.Include, FindObjectsSortMode.None));
-        //_reactor = FindFirstObjectByType<ReactorController>();
 
         ResetMiniGame();
     }
@@ -37,8 +35,8 @@ public class MiniGameController : MonoBehaviour
     {
         if (_isGameActive)
         {
-            UpdateTimer(); 
-            CheckForInput(); 
+            UpdateTimer();
+            CheckForInput();
             ExitMiniGame();
         }
     }
@@ -72,12 +70,11 @@ public class MiniGameController : MonoBehaviour
         if (isWin)
         {
             Debug.Log("Мини-игра выиграна!");
+
             // Находим реактор с наименьшей температурой
             ReactorController coldestReactor = GetColdestReactor();
             if (coldestReactor != null)
-            {
                 coldestReactor.temperature = 450f; // Устанавливаем температуру
-            }
         }
         else
         {
@@ -106,8 +103,8 @@ public class MiniGameController : MonoBehaviour
 
     private void ExitMiniGame()
     {
-        if (Input.GetKeyDown(KeyCode.F)) 
-            EndMiniGame(false); 
+        if (Input.GetKeyDown(KeyCode.F))
+            EndMiniGame(false);
     }
 
     private void UpdateTimer()

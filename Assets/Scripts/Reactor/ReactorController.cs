@@ -18,9 +18,9 @@ public class ReactorController : MonoBehaviour
     [Header("Economy")] public float moneyInterval = 5f; // �������� ���������� ����� (� ��������)
     public int moneyPerInterval = 10; // ���������� ����� �� ��������
 
-    [Header("UI")] [SerializeField] private Slider _temperatureSlider;
+    [Header("UI")][SerializeField] private Slider _temperatureSlider;
 
-    [Header("Effects")] [SerializeField] private GameObject _explosionEffect; // ������ ������� ������
+    [Header("Effects")][SerializeField] private GameObject _explosionEffect; // ������ ������� ������
     [SerializeField] private Renderer _reactorRenderer;
     [SerializeField] private Color _normalColor = Color.white;
     [SerializeField] private Color _overheatingColor = Color.red;
@@ -78,12 +78,29 @@ public class ReactorController : MonoBehaviour
 
     public void DestroyReactor()
     {
-        int refundAmount = ReactorEconomy.BaseReactorCost / 2; // ���������� 50% ��������� (������)
-        AddMoney(refundAmount);
+        // Находим все реакторы на сцене (используем современный метод FindObjectsByType)
+        ReactorController[] allReactors = FindObjectsByType<ReactorController>(FindObjectsSortMode.None);
 
-        Debug.Log($"������� ���������! �� �������� {refundAmount} �����.");
+        if (allReactors.Length > 0)
+        {
+            // Ищем реактор с минимальной температурой
+            ReactorController coldestReactor = allReactors[0];
+            foreach (var reactor in allReactors)
+            {
+                if (reactor.temperature < coldestReactor.temperature)
+                {
+                    coldestReactor = reactor;
+                }
+            }
 
-        DeactivateReactor();
+            // Деактивируем найденный реактор
+            int refundAmount = ReactorEconomy.BaseReactorCost / 2;
+            AddMoney(refundAmount);
+            Debug.Log($"Уничтожен реактор с температурой {coldestReactor.temperature}! Вы получили {refundAmount} денег.");
+
+            coldestReactor.DeactivateReactor();
+            return; // Выходим, так как нашли реактор для деактивации
+        }
     }
 
     public void Explode()
