@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0080e47e96fb31149abacc775f87fc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSceneName: TestReactor
+  _gameSceneName: GamePlayRoom
   _menuPanel: {fileID: 670156044}
   _settingsPanel: {fileID: 212023651}
   _aboutPanel: {fileID: 2052816150}

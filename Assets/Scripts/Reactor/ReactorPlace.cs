@@ -125,9 +125,10 @@ public class ReactorState
 
     private void UpdateUI()
     {
-        if (_buyPromptUI != null)
+        /*if (_buyPromptUI != null)
         {
             _buyPromptUI.SetVisible(IsPlayerInRange && !HasReactor);
-        }
+        
+        }*/
     }
 }
