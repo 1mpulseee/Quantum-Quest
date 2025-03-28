@@ -10,6 +10,11 @@ public class PauseHandler : MonoBehaviour
     
     private bool _isPaused;
 
+    /*private void Awake()
+    {
+        gameObject.transform.localScale = new Vector3(0, 0, 0);
+    }*/
+
     private void Update()
     {
         Pause();
