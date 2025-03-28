@@ -50,7 +50,8 @@ public class ReactorPlace : MonoBehaviour
         if (reactorPrefab != null)
         {
             GameObject reactor = Instantiate(reactorPrefab,
-                new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+                new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z),
+                transform.rotation);
             reactor.transform.SetParent(transform);
 
             ReactorController reactorController = reactor.GetComponent<ReactorController>();
@@ -126,10 +127,9 @@ public class ReactorState
 
     private void UpdateUI()
     {
-        /*if (_buyPromptUI != null)
+        if (_buyPromptUI != null)
         {
             _buyPromptUI.SetVisible(IsPlayerInRange && !HasReactor);
-
-        }*/
+        }
     }
 }

@@ -315,7 +315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.73, y: 0}
+  m_AnchoredPosition: {x: 2.73, y: 1.99}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3481353047114183566
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 3691397672068903552}
   m_Layer: 0
   m_Name: Reactor
-  m_TagString: Untagged
+  m_TagString: Reactor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -872,7 +872,7 @@ MonoBehaviour:
       m_Calls: []
   temperature: 500
   optimalMin: 450
-  optimalMax: 750
+  optimalMax: 550
   coolingRate: 10
   heatingRate: 10
   _minTemp: 200
@@ -932,7 +932,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.84
+  m_Radius: 2.56
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &3691397672068903552
 MeshRenderer:

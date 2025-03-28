@@ -7,25 +7,25 @@ using TMPro;
 
 public class MiniGameController : MonoBehaviour
 {
-    public UnityEvent<bool> OnMiniGameEnded; // Событие окончания мини-игры
+    public UnityEvent<bool> OnMiniGameEnded; // РЎРѕР±С‹С‚РёРµ РѕРєРѕРЅС‡Р°РЅРёСЏ РјРёРЅРё-РёРіСЂС‹
 
     public List<Image> lamps;
     public List<Image> diodes;
 
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private float _diodeDelay = 1f; // Задержка между переключениями диодов
-    [SerializeField] private float _gameDuration = 30f; // Длительность мини-игры в секундах
+    [SerializeField] private float _diodeDelay = 1f; // Р—Р°РґРµСЂР¶РєР° РјРµР¶РґСѓ РїРµСЂРµРєР»СЋС‡РµРЅРёСЏРјРё РґРёРѕРґРѕРІ
+    [SerializeField] private float _gameDuration = 30f; // Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ РјРёРЅРё-РёРіСЂС‹ РІ СЃРµРєСѓРЅРґР°С…
 
-    private List<ReactorController> _reactors; // Список всех реакторов
-    private int _currentDiodeIndex; // Индекс текущего активного диода
-    private bool _isGameActive; // Активна ли мини-игра
-    private float _timeRemaining; // Оставшееся время
-    private bool _isProcessingClick; // Флаг для обработки клика
-    private bool _isClockwise = true; // Направление движения диодов (по часовой стрелке)
+    private List<ReactorController> _reactors; // РЎРїРёСЃРѕРє РІСЃРµС… СЂРµР°РєС‚РѕСЂРѕРІ
+    private int _currentDiodeIndex; // РРЅРґРµРєСЃ С‚РµРєСѓС‰РµРіРѕ Р°РєС‚РёРІРЅРѕРіРѕ РґРёРѕРґР°
+    private bool _isGameActive; // РђРєС‚РёРІРЅР° Р»Рё РјРёРЅРё-РёРіСЂР°
+    private float _timeRemaining; // РћСЃС‚Р°РІС€РµРµСЃСЏ РІСЂРµРјСЏ
+    private bool _isProcessingClick; // Р¤Р»Р°Рі РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РєР»РёРєР°
+    private bool _isClockwise = true; // РќР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ РґРёРѕРґРѕРІ (РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ)
 
     private void Start()
     {
-        // Находим все реакторы в сцене
+        // РќР°С…РѕРґРёРј РІСЃРµ СЂРµР°РєС‚РѕСЂС‹ РІ СЃС†РµРЅРµ
         _reactors = new List<ReactorController>(FindObjectsByType<ReactorController>(FindObjectsInactive.Include, FindObjectsSortMode.None));
 
         ResetMiniGame();
@@ -51,13 +51,13 @@ public class MiniGameController : MonoBehaviour
         _isGameActive = true;
         _timeRemaining = _gameDuration;
         _currentDiodeIndex = 0;
-        _isClockwise = true; // Начинаем с движения по часовой стрелке
+        _isClockwise = true; // РќР°С‡РёРЅР°РµРј СЃ РґРІРёР¶РµРЅРёСЏ РїРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ
 
-        // Сбрасываем состояние лампочек и диодов
+        // РЎР±СЂР°СЃС‹РІР°РµРј СЃРѕСЃС‚РѕСЏРЅРёРµ Р»Р°РјРїРѕС‡РµРє Рё РґРёРѕРґРѕРІ
         ResetMiniGame();
 
-        StartCoroutine(ActivateDiodes()); // Запускаем переключение диодов
-        Debug.Log("Мини-игра запущена!");
+        StartCoroutine(ActivateDiodes()); // Р—Р°РїСѓСЃРєР°РµРј РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РґРёРѕРґРѕРІ
+        Debug.Log("РњРёРЅРё-РёРіСЂР° Р·Р°РїСѓС‰РµРЅР°!");
     }
 
     public void EndMiniGame(bool isWin)
@@ -65,24 +65,24 @@ public class MiniGameController : MonoBehaviour
         if (!_isGameActive) return;
 
         _isGameActive = false;
-        StopAllCoroutines(); // Останавливаем переключение диодов
+        StopAllCoroutines(); // РћСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РґРёРѕРґРѕРІ
 
         if (isWin)
         {
-            Debug.Log("Мини-игра выиграна!");
+            Debug.Log("РњРёРЅРё-РёРіСЂР° РІС‹РёРіСЂР°РЅР°!");
 
-            // Находим реактор с наименьшей температурой
+            // РќР°С…РѕРґРёРј СЂРµР°РєС‚РѕСЂ СЃ РЅР°РёРјРµРЅСЊС€РµР№ С‚РµРјРїРµСЂР°С‚СѓСЂРѕР№
             ReactorController coldestReactor = GetColdestReactor();
             if (coldestReactor != null)
-                coldestReactor.temperature = 450f; // Устанавливаем температуру
+                coldestReactor.temperature = 450f; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РµРјРїРµСЂР°С‚СѓСЂСѓ
         }
         else
         {
-            Debug.Log("Мини-игра проиграна!");
+            Debug.Log("РњРёРЅРё-РёРіСЂР° РїСЂРѕРёРіСЂР°РЅР°!");
         }
 
-        OnMiniGameEnded.Invoke(isWin); // Уведомляем о завершении мини-игры
-        gameObject.SetActive(false); // Скрываем мини-игру
+        OnMiniGameEnded.Invoke(isWin); // РЈРІРµРґРѕРјР»СЏРµРј Рѕ Р·Р°РІРµСЂС€РµРЅРёРё РјРёРЅРё-РёРіСЂС‹
+        gameObject.SetActive(false); // РЎРєСЂС‹РІР°РµРј РјРёРЅРё-РёРіСЂСѓ
     }
 
     private ReactorController GetColdestReactor()
@@ -110,57 +110,57 @@ public class MiniGameController : MonoBehaviour
     private void UpdateTimer()
     {
         _timeRemaining -= Time.deltaTime;
-        _timerText.text = Mathf.CeilToInt(_timeRemaining).ToString(); // Отображаем только секунды
+        _timerText.text = Mathf.CeilToInt(_timeRemaining).ToString(); // РћС‚РѕР±СЂР°Р¶Р°РµРј С‚РѕР»СЊРєРѕ СЃРµРєСѓРЅРґС‹
 
         if (_timeRemaining <= 0)
         {
-            EndMiniGame(false); // Завершаем игру, если время вышло
+            EndMiniGame(false); // Р—Р°РІРµСЂС€Р°РµРј РёРіСЂСѓ, РµСЃР»Рё РІСЂРµРјСЏ РІС‹С€Р»Рѕ
         }
     }
 
     private void CheckForInput()
     {
-        if (Input.GetMouseButtonDown(0) && !_isProcessingClick) // ЛКМ и клик не обрабатывается
+        if (Input.GetMouseButtonDown(0) && !_isProcessingClick) // Р›РљРњ Рё РєР»РёРє РЅРµ РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ
         {
-            StartCoroutine(ProcessClick()); // Обрабатываем клик
+            StartCoroutine(ProcessClick()); // РћР±СЂР°Р±Р°С‚С‹РІР°РµРј РєР»РёРє
         }
     }
 
     IEnumerator ProcessClick()
     {
-        _isProcessingClick = true; // Блокируем обработку новых кликов
+        _isProcessingClick = true; // Р‘Р»РѕРєРёСЂСѓРµРј РѕР±СЂР°Р±РѕС‚РєСѓ РЅРѕРІС‹С… РєР»РёРєРѕРІ
 
-        // Включаем/выключаем лампочку под текущим диодом
+        // Р’РєР»СЋС‡Р°РµРј/РІС‹РєР»СЋС‡Р°РµРј Р»Р°РјРїРѕС‡РєСѓ РїРѕРґ С‚РµРєСѓС‰РёРј РґРёРѕРґРѕРј
         ToggleLampUnderCurrentDiode();
 
-        // Меняем направление движения диодов
+        // РњРµРЅСЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ РґРёРѕРґРѕРІ
         _isClockwise = !_isClockwise;
 
-        // Ждем небольшое время перед переключением диода
-        yield return new WaitForSeconds(0.1f); // Задержка для визуальной обратной связи
+        // Р–РґРµРј РЅРµР±РѕР»СЊС€РѕРµ РІСЂРµРјСЏ РїРµСЂРµРґ РїРµСЂРµРєР»СЋС‡РµРЅРёРµРј РґРёРѕРґР°
+        yield return new WaitForSeconds(0.1f); // Р—Р°РґРµСЂР¶РєР° РґР»СЏ РІРёР·СѓР°Р»СЊРЅРѕР№ РѕР±СЂР°С‚РЅРѕР№ СЃРІСЏР·Рё
 
-        _isProcessingClick = false; // Разблокируем обработку кликов
+        _isProcessingClick = false; // Р Р°Р·Р±Р»РѕРєРёСЂСѓРµРј РѕР±СЂР°Р±РѕС‚РєСѓ РєР»РёРєРѕРІ
     }
 
     private void ToggleLampUnderCurrentDiode()
     {
-        // Получаем лампочку под текущим диодом
+        // РџРѕР»СѓС‡Р°РµРј Р»Р°РјРїРѕС‡РєСѓ РїРѕРґ С‚РµРєСѓС‰РёРј РґРёРѕРґРѕРј
         Image lamp = lamps[_currentDiodeIndex];
 
-        // Включаем/выключаем лампочку
+        // Р’РєР»СЋС‡Р°РµРј/РІС‹РєР»СЋС‡Р°РµРј Р»Р°РјРїРѕС‡РєСѓ
         if (lamp.color == Color.gray)
         {
-            lamp.color = Color.yellow; // Включаем лампочку
+            lamp.color = Color.yellow; // Р’РєР»СЋС‡Р°РµРј Р»Р°РјРїРѕС‡РєСѓ
         }
         else
         {
-            lamp.color = Color.gray; // Выключаем лампочку
+            lamp.color = Color.gray; // Р’С‹РєР»СЋС‡Р°РµРј Р»Р°РјРїРѕС‡РєСѓ
         }
 
-        // Проверяем, все ли лампочки зажжены
+        // РџСЂРѕРІРµСЂСЏРµРј, РІСЃРµ Р»Рё Р»Р°РјРїРѕС‡РєРё Р·Р°Р¶Р¶РµРЅС‹
         if (CheckWinCondition())
         {
-            EndMiniGame(true); // Завершаем игру победой
+            EndMiniGame(true); // Р—Р°РІРµСЂС€Р°РµРј РёРіСЂСѓ РїРѕР±РµРґРѕР№
         }
     }
 
@@ -168,26 +168,26 @@ public class MiniGameController : MonoBehaviour
     {
         while (_isGameActive)
         {
-            // Выключаем все диоды
+            // Р’С‹РєР»СЋС‡Р°РµРј РІСЃРµ РґРёРѕРґС‹
             foreach (var diode in diodes)
             {
                 diode.color = Color.gray;
             }
 
-            // Включаем текущий диод
+            // Р’РєР»СЋС‡Р°РµРј С‚РµРєСѓС‰РёР№ РґРёРѕРґ
             diodes[_currentDiodeIndex].color = Color.green;
 
-            // Ждем перед следующим переключением
+            // Р–РґРµРј РїРµСЂРµРґ СЃР»РµРґСѓСЋС‰РёРј РїРµСЂРµРєР»СЋС‡РµРЅРёРµРј
             yield return new WaitForSeconds(_diodeDelay);
 
-            // Переходим к следующему диоду в зависимости от направления
+            // РџРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ РґРёРѕРґСѓ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РЅР°РїСЂР°РІР»РµРЅРёСЏ
             if (_isClockwise)
             {
-                _currentDiodeIndex = (_currentDiodeIndex + 1) % diodes.Count; // По часовой стрелке
+                _currentDiodeIndex = (_currentDiodeIndex + 1) % diodes.Count; // РџРѕ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРµ
             }
             else
             {
-                _currentDiodeIndex = (_currentDiodeIndex - 1 + diodes.Count) % diodes.Count; // Против часовой стрелки
+                _currentDiodeIndex = (_currentDiodeIndex - 1 + diodes.Count) % diodes.Count; // РџСЂРѕС‚РёРІ С‡Р°СЃРѕРІРѕР№ СЃС‚СЂРµР»РєРё
             }
         }
     }
@@ -196,11 +196,11 @@ public class MiniGameController : MonoBehaviour
     {
         foreach (var lamp in lamps)
         {
-            lamp.color = Color.gray; // Выключаем все лампочки
+            lamp.color = Color.gray; // Р’С‹РєР»СЋС‡Р°РµРј РІСЃРµ Р»Р°РјРїРѕС‡РєРё
         }
         foreach (var diode in diodes)
         {
-            diode.color = Color.gray; // Выключаем все диоды
+            diode.color = Color.gray; // Р’С‹РєР»СЋС‡Р°РµРј РІСЃРµ РґРёРѕРґС‹
         }
     }
 
@@ -210,9 +210,9 @@ public class MiniGameController : MonoBehaviour
         {
             if (lamp.color == Color.gray)
             {
-                return false; // Есть выключенные лампочки
+                return false; // Р•СЃС‚СЊ РІС‹РєР»СЋС‡РµРЅРЅС‹Рµ Р»Р°РјРїРѕС‡РєРё
             }
         }
-        return true; // Все лампочки включены
+        return true; // Р’СЃРµ Р»Р°РјРїРѕС‡РєРё РІРєР»СЋС‡РµРЅС‹
     }
 }
