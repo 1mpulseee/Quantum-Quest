@@ -6,7 +6,8 @@ public class ReactorController : MonoBehaviour
 {
     public UnityEvent OnReactorDestroyed; // ������� �������� ��������
 
-    [Header("Temperature Settings")] public float temperature = 500f; // ��������� �����������
+    [Header("Temperature Settings")] 
+    public float temperature = 500f; // ��������� �����������
     public float optimalMin = 450f; // ����������� ����������� �����������
     public float optimalMax = 750f; // ������������ ����������� �����������
     public float coolingRate = 1f; // �������� ����������
@@ -15,16 +16,22 @@ public class ReactorController : MonoBehaviour
     [SerializeField] private float _minTemp = 200f;
     [SerializeField] private float _maxTemp = 1000f;
 
-    [Header("Economy")] public float moneyInterval = 5f; // �������� ���������� ����� (� ��������)
+    [Header("Economy")] 
+    public float moneyInterval = 5f; // �������� ���������� ����� (� ��������)
     public int moneyPerInterval = 10; // ���������� ����� �� ��������
 
-    [Header("UI")][SerializeField] private Slider _temperatureSlider;
+    [Header("UI")]
+    [SerializeField] private Slider _temperatureSlider;
 
-    [Header("Effects")][SerializeField] private GameObject _explosionEffect; // ������ ������� ������
+    [Header("Effects")]
+    [SerializeField] private GameObject _explosionEffect; // ������ ������� ������
     [SerializeField] private Renderer _reactorRenderer;
     [SerializeField] private Color _normalColor = Color.white;
     [SerializeField] private Color _overheatingColor = Color.red;
     [SerializeField] private Color _coolingColor = Color.blue;
+
+    [Header("Sound")]
+    [SerializeField] private AudioSource _audioSource;
 
     private float _timer;
     private bool _isMiniGameActive;
