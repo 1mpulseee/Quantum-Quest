@@ -27,7 +27,7 @@ public class PickableItem : MonoBehaviour
 
     public void PickUp()
     {
-        transform.DOScale(0f, 0.2f).From(transform.localScale).SetEase(Ease.Linear);
+        transform.DOScale(0f, 0.2f).From(30).SetEase(Ease.Linear);
         
         _hintTriggerZone.enabled = false;
         
@@ -36,7 +36,7 @@ public class PickableItem : MonoBehaviour
         transform.rotation = new Quaternion(0, 0, 0, 0);
         transform.parent = _holdPoint;
         
-        transform.DOScale(transform.localScale, 0.2f).From(0f).SetEase(Ease.OutBounce);
+        transform.DOScale(30, 0.2f).From(0f).SetEase(Ease.OutBounce);
         _isHeld = true;
         HintManager.HideHintEvent?.Invoke();
     }

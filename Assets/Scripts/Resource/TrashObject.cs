@@ -7,7 +7,7 @@ public class TrashObject : MonoBehaviour
     [SerializeField] private float _upTemperatueCount = 100f;
 
     [Header("Effector")]
-    [SerializeField] private GameObject _paffEffect;
+    [SerializeField] private GameObject _fallEffect;
     [SerializeField] private GameObject _touchEffect;
     [SerializeField] private float _effectLifeTime;
 
@@ -15,30 +15,22 @@ public class TrashObject : MonoBehaviour
     {
         if (other.CompareTag("Reactor"))
         {
-            ReactorController reactor = other.gameObject.GetComponent<ReactorController>();
+            ReactorController reactor = other.GetComponent<ReactorController>();
 
             GameObject newEffect = Instantiate(_touchEffect, transform.position, Quaternion.identity);
+            reactor.UpTemperature(_upTemperatueCount);
             Destroy(newEffect, _effectLifeTime);
-
-            StartCoroutine(DestroyAnimation(gameObject, reactor));
+            Destroy(gameObject);
         }
-    }
-
-    IEnumerator DestroyAnimation(GameObject _gameObject, ReactorController reactor)
-    {
-        transform.DOScale(0f, 0.2f).From(transform.localScale).SetEase(Ease.InQuad);
-        yield return new WaitForSeconds(0.2f);
-        Destroy(_gameObject);
-        reactor.UpTemperature(_upTemperatueCount);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            if (_paffEffect != null)
+            if (_fallEffect != null)
             {
-                GameObject newEffect = Instantiate(_paffEffect, transform.position, Quaternion.identity);
+                GameObject newEffect = Instantiate(_fallEffect, transform.position, Quaternion.identity);
                 Destroy(newEffect, _effectLifeTime);
             }
         }

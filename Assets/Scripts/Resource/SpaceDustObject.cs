@@ -18,18 +18,10 @@ public class SpaceDustObject : MonoBehaviour
             ReactorController reactor = other.GetComponent<ReactorController>();
 
             GameObject newEffect = Instantiate(_touchEffect, transform.position, Quaternion.identity);
+            reactor.LowTemperature(_lowTemperatueCount);
             Destroy(newEffect, _effectLifeTime);
-
-            StartCoroutine(DestroyAnimation(gameObject, reactor));
+            Destroy(gameObject);
         }
-    }
-
-    IEnumerator DestroyAnimation(GameObject _gameObject, ReactorController reactor)
-    {
-        transform.DOScale(0f, 0.2f).From(transform.localScale).SetEase(Ease.InQuad);
-        yield return new WaitForSeconds(0.2f);
-        Destroy(_gameObject);
-        reactor.LowTemperature(_lowTemperatueCount);
     }
 
     private void OnCollisionEnter(Collision collision)

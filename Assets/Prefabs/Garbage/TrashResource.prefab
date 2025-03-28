@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5534785647218633115}
   - component: {fileID: 6917712130688100683}
   - component: {fileID: 7345340168424959849}
-  - component: {fileID: 4373323798398206285}
+  - component: {fileID: 6561213294564281691}
   m_Layer: 0
   m_Name: TrashResource
   m_TagString: Garbage
@@ -31,10 +31,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.42, z: 5.25}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1995581054337394232}
+  - {fileID: 1823667005764174699}
   - {fileID: 3433415491762919681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,7 +84,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.12
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6917712130688100683
 MonoBehaviour:
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hintTriggerZone: {fileID: 7188516394880986833}
---- !u!114 &4373323798398206285
+--- !u!114 &6561213294564281691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _upTemperatueCount: 100
-  _paffEffect: {fileID: 1037864198121816, guid: 638c8ca438a11c54987de876e500ed02, type: 3}
+  _fallEffect: {fileID: 1037864198121816, guid: 638c8ca438a11c54987de876e500ed02, type: 3}
   _touchEffect: {fileID: 339158821923109191, guid: 108ca465382c11742bd2c91fe4fdb13f, type: 3}
   _effectLifeTime: 1
 --- !u!1 &2728159854235317680
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 3433415491762919681}
   - component: {fileID: 7188516394880986833}
   - component: {fileID: 3712583100866837569}
-  - component: {fileID: 5236993266453483895}
+  - component: {fileID: 9035031102787070143}
   m_Layer: 0
   m_Name: HintTriggerZone
   m_TagString: Untagged
@@ -180,7 +180,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3712583100866837569
 MonoBehaviour:
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _message: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \"E\", \u0447\u0442\u043E\u0431\u044B
     \u043F\u043E\u0434\u043D\u044F\u0442\u044C \u043F\u0440\u0435\u0434\u043C\u0435\u0442"
---- !u!114 &5236993266453483895
+--- !u!114 &9035031102787070143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3139695a19d47338b1bb24d773c2214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2034223058955977171
+--- !u!1001 &2216982711725319296
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -218,15 +218,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,7 +282,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 07a8e5f16f033b342918c38dd6d40d99, type: 2}
     - target: {fileID: 919132149155446097, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
       propertyPath: m_Name
-      value: GarbagePocketReady
+      value: model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -290,20 +294,20 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4067192030577735804}
+      addedObject: {fileID: 4354189807277790312}
   m_SourcePrefab: {fileID: 100100000, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
---- !u!1 &1223407663576513666 stripped
+--- !u!1 &1298487869146192337 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
-  m_PrefabInstance: {fileID: 2034223058955977171}
+  m_PrefabInstance: {fileID: 2216982711725319296}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4067192030577735804
+--- !u!65 &4354189807277790312
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223407663576513666}
+  m_GameObject: {fileID: 1298487869146192337}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -316,10 +320,10 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019985998, y: 0.011502069, z: 0.020000005}
-  m_Center: {x: 0, y: 0.00000023841858, z: 0}
---- !u!4 &1995581054337394232 stripped
+  m_Size: {x: 0.019985996, y: 0.011502069, z: 0.020000005}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1823667005764174699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab99f7f4d24b16c4e971184bcb1f20b4, type: 3}
-  m_PrefabInstance: {fileID: 2034223058955977171}
+  m_PrefabInstance: {fileID: 2216982711725319296}
   m_PrefabAsset: {fileID: 0}
